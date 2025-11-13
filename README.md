@@ -92,4 +92,4 @@ To generate a Schema Registry API key and secret, follow the steps below:
 ## Step 10 - Run the Apache Kafka consumer
 
 ## Additional Resources
-For additional Confluent Cloud courses, you can find the next course [here]([https://www.confluent.io/confluent-cloud/tryfree/](https://developer.confluent.io/courses/apache-kafka/get-started-hands-on/). 
+For additional Confluent Cloud courses, you can find the next course [here](https://developer.confluent.io/courses/apache-kafka/get-started-hands-on/). 
