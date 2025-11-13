@@ -100,10 +100,21 @@ Just like the Kafka Cluster API key and secret, keep this file and your credenti
 ## Step 7 - Run the Apache Kafka producer
 A Kafka producer is an application or client that sends (or “produces”) messages to Kafka topics. To create an Apache Kafka producer, you can follow the steps below:
 1. Open the "kafka_consumer.py" file.
-2. Replace the "<CLOUD CLUSTER BOOTSTRAP SERVER>" string in the "kafka_consumer.py" file using the "Bootstrap server" information from the ".txt" file you downloaded in Step 5.
-3. Replace the value of the "sasl.username" in the "kafka_consumer.py" file using the "API key" information from the ".txt" file you downloaded in Step 5.
-4. Replace the value of the "sasl.password" in the "kafka_consumer.py" file using the "API secret" information from the ".txt" file you downloaded in Step 5.
-
+2. Replace the "`<CLOUD CLUSTER BOOTSTRAP SERVER>`" string in the "kafka_producer.py" file using the "Bootstrap server" information from the ".txt" file you downloaded in Step 5.
+3. Replace the "`<CLOUD CLUSTER API KEY>`" string in the "kafka_producer.py" file using the "API key" information from the ".txt" file you downloaded in Step 5.
+4. Replace the "`<CLOUD CLUSTER API SECRET>`" string in the "kafka_producer.py" file using the "API secret" information from the ".txt" file you downloaded in Step 5.
+5. Replace the "`<SCHEMA REGISTRY PUBLIC ENDPOINT>`" string in the "kafka_producer.py" file using the "Endpoint" information from the ".txt" file you downloaded in Step 6.
+6. Replace the "`<SCHEMA REGISTRY API KEY>`" string in the "kafka_producer.py" file using the "API key" information from the ".txt" file you downloaded in Step 6.
+7. Replace the "`<SCHEMA REGISTRY API SECRET>`" string in the "kafka_producer.py" file using the "API secret" information from the ".txt" file you downloaded in Step 6.
+8. Open a terminal in the directory where your "kafka_producer.py" file is located.
+9. Run the following command to execute the "kafka_producer.py" script:
+```
+python3 kafka_producer.py  
+```
+10. If you see the following message, you have successfully sent data to the "iot" Kafka topic:
+```
+Message delivered to "iot" [partition X] at offset Y
+```
 ## Step 8 - Create a Flink Compute Pool
 
 ## Step 9 - Run a Transformation Query using Flink
