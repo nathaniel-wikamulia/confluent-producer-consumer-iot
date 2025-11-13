@@ -98,7 +98,11 @@ Just like the Kafka Cluster API key and secret, keep this file and your credenti
 **Note: After you download your API key and secret and exit this menu, they will no longer be visible in the console. You can only access them from the ".txt" file you just downloaded, so make sure not to lose it.**
 
 ## Step 7 - Run the Apache Kafka producer
-
+A Kafka producer is an application or client that sends (or “produces”) messages to Kafka topics. To create an Apache Kafka producer, you can follow the steps below:
+1. Open the "kafka_consumer.py" file.
+2. Replace the "<CLOUD CLUSTER BOOTSTRAP SERVER>" string in the "kafka_consumer.py" file using the "Bootstrap server" information from the ".txt" file you downloaded in Step 5.
+3. Replace the value of the "sasl.username" in the "kafka_consumer.py" file using the "API key" information from the ".txt" file you downloaded in Step 5.
+4. Replace the value of the "sasl.password" in the "kafka_consumer.py" file using the "API secret" information from the ".txt" file you downloaded in Step 5.
 
 ## Step 8 - Create a Flink Compute Pool
 
