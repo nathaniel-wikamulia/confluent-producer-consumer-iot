@@ -1,6 +1,6 @@
 # Introduction to Producer and Consumer
 In this repository, you will learn how to create a Python Kafka producer, send IoT data to Confluent Cloud, process the data using Flink, create a Python Kafka consumer, and consume the processed data with the consumer.
-
+<br><br>
 ## Prerequisites
 1. Download the code from this repository.
 2. Install the Confluent Kafka Python client along with optional JSON Schema and performance dependencies:
@@ -10,10 +10,10 @@ python3 -m pip install -U "confluent-kafka[jsonschema]" referencing
 python3 -m pip install -U "confluent-kafka[jsonschema]" jsonschema referencing rpds-py
 python3 -m pip install -U orjson
 ```
-
+<br><br>
 ## Step 1 - Login to Confluent Cloud
 1. Log in to [Confluent Cloud](https://confluent.cloud) and enter your email and password. If you don't have an account you can sign up [here](https://www.confluent.io/confluent-cloud/tryfree/).
-
+<br><br>
 ## Step 2 - Create a Confluent Cloud Environment
 In this step, we will create a new Environment.
 
@@ -27,16 +27,7 @@ Steps to create an environment:
 3. Enter a name for your environment. For this workshop, we’ll use "demo_environment".
 4. For the Stream Governance package, select "Essentials".
 5. Click "Create" to finish setting up your environment.
-
-
-
-
-
-
-
-
-
-
+<br><br>
 ## Step 3 - Create a Confluent Cloud Cluster
 Once you have created an environment, you can proceed to create a Confluent Cloud cluster.
 
@@ -57,7 +48,7 @@ To create the cluster you can follow these steps below:
 5. Choose your preferred cloud provider. For this workshop, we'll use "Azure", and for the region, we'll choose Singapore (southeastasia).
 6. Enter a name for your cluster. For this workshop, we’ll use "azure_cluster".
 7. Click the "Launch cluster" button to create your cluster.
-
+<br><br>
 ## Step 4 - Create an Apache Kafka topic
 After creating a Confluent Cloud cluster, we'll create a new Apache Kafka topic called "iot".
 
