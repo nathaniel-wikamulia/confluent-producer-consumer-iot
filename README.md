@@ -1,6 +1,6 @@
 # Introduction to Producer and Consumer
 In this repository, you will learn how to create a Python Kafka producer, send IoT data to Confluent Cloud, process the data using Flink, create a Python Kafka consumer, and consume the processed data with the consumer.
-<br><br>
+
 ## Prerequisites
 1. Download the code from this repository.
 2. Install the Confluent Kafka Python client along with optional JSON Schema and performance dependencies:
@@ -13,7 +13,7 @@ python3 -m pip install -U orjson
   
 ## Step 1 - Login to Confluent Cloud
 1. Log in to [Confluent Cloud](https://confluent.cloud) and enter your email and password. If you don't have an account you can sign up [here](https://www.confluent.io/confluent-cloud/tryfree/).
-<br><br>
+
 ## Step 2 - Create a Confluent Cloud Environment
 In this step, we will create a new Environment.
 
@@ -27,7 +27,7 @@ Steps to create an environment:
 3. Enter a name for your environment. For this workshop, we’ll use "demo_environment".
 4. For the Stream Governance package, select "Essentials".
 5. Click "Create" to finish setting up your environment.
-<br><br>
+
 ## Step 3 - Create a Confluent Cloud Cluster
 Once you have created an environment, you can proceed to create a Confluent Cloud cluster.
 
@@ -48,7 +48,7 @@ To create the cluster you can follow these steps below:
 5. Choose your preferred cloud provider. For this workshop, we'll use "Azure", and for the region, we'll choose Singapore (southeastasia).
 6. Enter a name for your cluster. For this workshop, we’ll use "azure_cluster".
 7. Click the "Launch cluster" button to create your cluster.
-<br><br>
+
 ## Step 4 - Create an Apache Kafka topic
 After creating a Confluent Cloud cluster, we'll create a new Apache Kafka topic called "iot".
 
@@ -60,7 +60,7 @@ To create a topic, follow the steps below:
 3. Click the "Add topic" button on the right side of the page.
 4. Enter a name for your cluster. For this workshop, we’ll use "iot".
 5. Click on the "Create with defaults" button.
-<br><br>
+
 ## Step 5 - Create a Cluster API Key and API Secret
 Now we need to generate a Kafka cluster API key and secret, which we’ll use later to authenticate our producer and consumer with our Kafka cluster.
 
@@ -75,7 +75,7 @@ To generate a Kafka Cluster API key and secret, follow the steps below:
 Now a download will begin. You’ll receive a ".txt" file containing your API key, API secret, cluster ID, and bootstrap server. Keep this file and your credentials private, they are equivalent to a username and password. If exposed, external actors could use them to access or misuse the data and resources in your Confluent Cloud account.
 
 **Note: After you download your API key and secret and exit this menu, they will no longer be visible in the console. You can only access them from the ".txt" file you just downloaded, so make sure not to lose it.**
-<br><br>
+
 ## Step 6 - Create a Schema Registry API Key and API Secret
 Next, we need to generate a Schema Registry API key and secret, which will be used later to authenticate our producer and consumer with the Schema Registry.
 
@@ -96,7 +96,7 @@ To generate a Schema Registry API key and secret, follow the steps below:
 Just like the Kafka Cluster API key and secret, keep this file and your credentials private, they are equivalent to a username and password. If exposed, unauthorized users could access or misuse the data and resources in your Confluent Cloud account.
 
 **Note: After you download your API key and secret and exit this menu, they will no longer be visible in the console. You can only access them from the ".txt" file you just downloaded, so make sure not to lose it.**
-<br><br>
+
 ## Step 7 - Run the Apache Kafka producer
 Once you have the API key and secret for the Cluster and Schema Registry, you can start creating the Kafka producer.
 
@@ -117,7 +117,7 @@ python3 kafka_producer.py
 ```
 Message delivered to "iot" [partition 0] at offset 35
 ```
-<br><br>
+
 ## Step 8 - Create a Flink Compute Pool
 Now that the "iot" topic is filled with messages, we can start creating a Flink compute pool.
 
@@ -129,7 +129,7 @@ To create an Flink compute pool, you can follow the steps below:
 4. Enter a name for your compute pool. For this workshop, we’ll use "azure_flink_compute_pool".
 5. Set the "Max size" value to 10 CFU.
 6. Click the "Create" button to create your compute pool.
-<br><br>
+
 ## Step 9 - Run a Transformation Query using Flink
 Once the Flink compute pool has been provisioned, you can begin writing Flink queries. Follow the steps below to get started:
 1. Click the "Open SQL workspace" button on the right side of the page.
@@ -168,7 +168,7 @@ WHERE metric_type = 'temperature'
 ```
 5. Click the "Run" button on the right side of the cell.
 6. After you execute the Flink query, it will begin inserting the filtered data into a new Kafka topic called "alert_topic". If you see messages appearing in "alert_topic", it means your query ran successfully.
-<br><br>
+
 ## Step 10 - Run the Apache Kafka consumer
 In this step, we will start consuming data from the "alert_topic" using a Kafka consumer written in Python.
 
@@ -192,7 +192,7 @@ Key:   {'device_id': '4'}
 Value: {'alert_msg': 'Alert! the temperature of device_id 4 is 173.3 degrees Celsius'}
 ------------------------------------------------------------
 ```
-<br><br>
+
 ## Step 11 - Clean Up Your Confluent Cloud Resources
 To prevent your Confluent Cloud resources from incurring unnecessary costs, perform the following actions:
 1. Stop any running Flink query.
@@ -201,6 +201,6 @@ To prevent your Confluent Cloud resources from incurring unnecessary costs, perf
 4. Delete the Kafka Cluster API key and secret.
 5. Delete the Schema Registry API key and secret.
 6. Delete the Kafka cluster.
-<br><br>
+
 ## Additional Resources
 For additional Confluent Cloud courses, you can find the next course [here](https://developer.confluent.io/courses/apache-kafka/get-started-hands-on/). 
