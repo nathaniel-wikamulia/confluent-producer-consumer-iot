@@ -1,5 +1,5 @@
-# Introduction to Producer and Consumer
-In this repository, you will learn how to create a Python Kafka producer, send IoT data to Confluent Cloud, process the data using Flink, create a Python Kafka consumer, and consume the processed data with the consumer.
+# Introduction to Kafka Producer and Consumer
+In this workshop, you will learn how to create a Python Kafka producer, send IoT data to Confluent Cloud, process the data using Flink, create a Python Kafka consumer, and consume the processed data with the consumer.
 
 ## Prerequisites
 1. Download the code from this repository.
