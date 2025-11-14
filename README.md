@@ -98,8 +98,10 @@ Just like the Kafka Cluster API key and secret, keep this file and your credenti
 **Note: After you download your API key and secret and exit this menu, they will no longer be visible in the console. You can only access them from the ".txt" file you just downloaded, so make sure not to lose it.**
 
 ## Step 7 - Run the Apache Kafka producer
+Once you have the API key and secret for the Cluster and Schema Registry, you can start creating the Kafka producer.
+
 A Kafka producer is an application or client that sends (or “produces”) messages to Kafka topics. To create an Apache Kafka producer, you can follow the steps below:
-1. Open the "kafka_consumer.py" file.
+1. Open the "kafka_producer.py" file.
 2. Replace the "`<CLOUD CLUSTER BOOTSTRAP SERVER>`" string in the "kafka_producer.py" file using the "Bootstrap server" information from the ".txt" file you downloaded in Step 5.
 3. Replace the "`<CLOUD CLUSTER API KEY>`" string in the "kafka_producer.py" file using the "API key" information from the ".txt" file you downloaded in Step 5.
 4. Replace the "`<CLOUD CLUSTER API SECRET>`" string in the "kafka_producer.py" file using the "API secret" information from the ".txt" file you downloaded in Step 5.
@@ -111,15 +113,92 @@ A Kafka producer is an application or client that sends (or “produces”) mess
 ```
 python3 kafka_producer.py  
 ```
-10. If you see the following message, you have successfully sent data to the "iot" Kafka topic:
+10. If you see a message similar to the one below, you have successfully sent data to the "iot" Kafka topic:
 ```
-Message delivered to "iot" [partition X] at offset Y
+Message delivered to "iot" [partition 0] at offset 35
 ```
 ## Step 8 - Create a Flink Compute Pool
+Now that the "iot" topic is filled with messages, we can start creating a Flink compute pool.
 
+A Flink compute pool in Confluent Cloud for Apache Flink represents a set of compute resources bound to a region that is used to run your SQL statements. The resources provided by a compute pool are shared between all statements that use it. The capacity of a compute pool is measured in CFUs.
+To create an Flink compute pool, you can follow the steps below:
+1. In the left-hand menu, select "Flink".
+2. Click the "Add compute pool" button on the right side of the page.
+3. Choose your preferred cloud provider. For this workshop, we'll use "Azure", and for the region, we'll choose Singapore (southeastasia). Please note that the Flink compute pool must match the Kafka cluster's region.
+4. Enter a name for your compute pool. For this workshop, we’ll use "azure_flink_compute_pool".
+5. Set the "Max size" value to 10 CFU.
+6. Click the "Create" button to create your compute pool.
+   
 ## Step 9 - Run a Transformation Query using Flink
+Once the Flink compute pool has been provisioned, you can begin writing Flink queries. Follow the steps below to get started:
+1. Click the "Open SQL workspace" button on the right side of the page.
+2. Open the "Catalog" dropdown in the top-right corner and select "demo_environment" to access your previously provisioned environment.
+3. Open the "Database" dropdown in the top right corner and choose "azure_cluster" to access your previously provisioned Kafka cluster.
+4. Paste the following Flink query into an empty cell:
+```
+CREATE TABLE alert_topic
+DISTRIBUTED BY (device_id) INTO 6 BUCKETS
+WITH (
+  'key.format' = 'json-registry',
+  'value.format' = 'json-registry'
+)
+AS
+WITH expanded_metrics AS (
+  SELECT
+    device_id,
+    sensor_timestamp,
+    u.sensortype  AS metric_type,
+    u.sensorvalue AS metric_value
+  FROM iot
+  CROSS JOIN UNNEST(metrics) AS u
+)
+SELECT 
+  device_id,
+  CONCAT(
+    'Alert! the temperature of device_id ',
+    device_id,
+    ' is ',
+    CAST(metric_value AS STRING),
+    ' degrees Celsius'
+  ) AS alert_msg
+FROM expanded_metrics
+WHERE metric_type = 'temperature' 
+  AND metric_value > 100;
+```
+5. Click the "Run" button on the right side of the cell.
+6. After you execute the Flink query, it will begin inserting the filtered data into a new Kafka topic called "alert_topic". If you see messages appearing in "alert_topic", it means your query ran successfully.
 
 ## Step 10 - Run the Apache Kafka consumer
+In this step, we will start consuming data from the "alert_topic" using a Kafka consumer written in Python.
+
+A Kafka consumer is an application or client that reads (or “consumes”) messages from Kafka topics. To create an Apache Kafka consumer, you can follow the steps below:
+1. Open the "kafka_consumer.py" file.
+2. Replace the "`<CLOUD CLUSTER BOOTSTRAP SERVER>`" string in the "kafka_consumer.py" file using the "Bootstrap server" information from the ".txt" file you downloaded in Step 5.
+3. Replace the "`<CLOUD CLUSTER API KEY>`" string in the "kafka_consumer.py" file using the "API key" information from the ".txt" file you downloaded in Step 5.
+4. Replace the "`<CLOUD CLUSTER API SECRET>`" string in the "kafka_consumer.py" file using the "API secret" information from the ".txt" file you downloaded in Step 5.
+5. Replace the "`<SCHEMA REGISTRY PUBLIC ENDPOINT>`" string in the "kafka_consumer.py" file using the "Endpoint" information from the ".txt" file you downloaded in Step 6.
+6. Replace the "`<SCHEMA REGISTRY API KEY>`" string in the "kafka_consumer.py" file using the "API key" information from the ".txt" file you downloaded in Step 6.
+7. Replace the "`<SCHEMA REGISTRY API SECRET>`" string in the "kafka_consumer.py" file using the "API secret" information from the ".txt" file you downloaded in Step 6.
+8. Open a terminal in the directory where your "kafka_consumer.py" file is located.
+9. Run the following command to execute the "kafka_consumer.py" script:
+```
+python3 kafka_consumer.py  
+```
+10. If you see a message similar to the one below, you have successfully consumed data from the "alert_topic":
+```
+Received from 'alert_topic' [p=4 o=14]
+Key:   {'device_id': '4'}
+Value: {'alert_msg': 'Alert! the temperature of device_id 4 is 173.3 degrees Celsius'}
+------------------------------------------------------------
+```
+## Step 11 - Clean Up Your Confluent Cloud Resources
+To prevent your Confluent Cloud resources from incurring unnecessary costs, perform the following actions:
+1. Stop any running Flink query.
+2. Delete the Flink compute pool.
+3. Delete the Schema Registry data contracts.
+4. Delete the Kafka Cluster API key and secret.
+5. Delete the Schema Registry API key and secret.
+6. Delete the Kafka cluster.
 
 ## Additional Resources
 For additional Confluent Cloud courses, you can find the next course [here](https://developer.confluent.io/courses/apache-kafka/get-started-hands-on/). 
