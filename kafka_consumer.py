@@ -10,7 +10,7 @@ kafka_conf = {
     'sasl.username': '<CLOUD CLUSTER API KEY>',
     'sasl.password': '<CLOUD CLUSTER API SECRET>',
     'group.id': 'my-consumer-group-2',
-    'auto.offset.reset': 'latest',
+    'auto.offset.reset': 'earliest',
     'enable.auto.commit': True
 }
 
