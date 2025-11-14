@@ -10,7 +10,7 @@ python3 -m pip install -U "confluent-kafka[jsonschema]" referencing
 python3 -m pip install -U "confluent-kafka[jsonschema]" jsonschema referencing rpds-py
 python3 -m pip install -U orjson
 ```
-<br><br>
+<br\>
 ## Step 1 - Login to Confluent Cloud
 1. Log in to [Confluent Cloud](https://confluent.cloud) and enter your email and password. If you don't have an account you can sign up [here](https://www.confluent.io/confluent-cloud/tryfree/).
 <br><br>
