@@ -10,7 +10,7 @@ python3 -m pip install -U "confluent-kafka[jsonschema]" referencing
 python3 -m pip install -U "confluent-kafka[jsonschema]" jsonschema referencing rpds-py
 python3 -m pip install -U orjson
 ```
-
+<br><br>
 ## Step 1 - Login to Confluent Cloud
 1. Log in to [Confluent Cloud](https://confluent.cloud) and enter your email and password. If you don't have an account you can sign up [here](https://www.confluent.io/confluent-cloud/tryfree/).
 <br><br>
@@ -117,7 +117,7 @@ python3 kafka_producer.py
 ```
 Message delivered to "iot" [partition 0] at offset 35
 ```
-<br>
+<br><br>
 ## Step 8 - Create a Flink Compute Pool
 Now that the "iot" topic is filled with messages, we can start creating a Flink compute pool.
 
@@ -192,7 +192,7 @@ Key:   {'device_id': '4'}
 Value: {'alert_msg': 'Alert! the temperature of device_id 4 is 173.3 degrees Celsius'}
 ------------------------------------------------------------
 ```
-<br>
+<br><br>
 ## Step 11 - Clean Up Your Confluent Cloud Resources
 To prevent your Confluent Cloud resources from incurring unnecessary costs, perform the following actions:
 1. Stop any running Flink query.
