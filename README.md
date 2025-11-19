@@ -5,6 +5,7 @@ In this workshop, you will learn how to create a Python Kafka producer, send IoT
 1. Download the code from this repository.
 2. Install the Confluent Kafka Python client along with optional JSON Schema and performance dependencies:
 ```
+sudo apt install python3-pip
 pip install confluent-kafka
 python3 -m pip install -U "confluent-kafka[jsonschema]" referencing
 python3 -m pip install -U "confluent-kafka[jsonschema]" jsonschema referencing rpds-py
