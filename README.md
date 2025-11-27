@@ -59,7 +59,7 @@ To create a topic, follow the steps below:
 1. Click the previously provisioned Confluent Cloud cluster.
 2. In the left-hand menu, select "Topics".
 3. Click the "Add topic" button on the right side of the page.
-4. Enter a name for your cluster. For this workshop, we’ll use "iot".
+4. Enter a name for your topic. For this workshop, we’ll use "iot".
 5. Click on the "Create with defaults" button.
 
 ## Step 5 - Create a Cluster API Key and API Secret
